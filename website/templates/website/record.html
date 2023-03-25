@@ -31,9 +31,12 @@
       <p class="card-text">
       <strong>Record ID: </strong>{{customerRecord.id}}
     </p>
+
+      <div class="d-grid gap-2 d-md-block">
         <a href={% url 'home' %} class="btn btn-secondary">Go Back</a>
         <a href={% url 'update_record' customerRecord.id %} class="btn btn-secondary">Update</a>
         <a href={% url 'delete_record' customerRecord.id %} class="btn btn-danger">Delete</a>
+      </div>
     </div>
 </div>
 

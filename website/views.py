@@ -8,7 +8,6 @@ from .models import Record
 
 
 def home(request):
-
     # Getting all the record in Record table and assigning to records variable
     records = Record.objects.all()
 
@@ -21,7 +20,6 @@ def home(request):
 
         # Authenticate the user
         user = authenticate(request, username=username, password=password)
-
         if user is not None:
             login(request, user)
             messages.success(request, "You have been Logged In")
@@ -39,7 +37,6 @@ def logout_user(request):
 
 
 def register_user(request):
-
     if request.method == 'POST':
         form = SignUpForm(request.POST)
 
@@ -68,12 +65,9 @@ def customer_record(request, pk):
 
     if request.user.is_authenticated:
         customerRecord = Record.objects.get(id=pk)
-
         return render(request, 'website/record.html', {'customerRecord': customerRecord})
-
     else:
-        messages.success(
-            request, "You Must be Logged In To View That Page  ")
+        messages.success(request, "You Must be Logged In To View That Page  ")
         return redirect('home')
 
 
@@ -93,13 +87,12 @@ def delete_record(request, pk):
 
 
 def add_record(request):
-
     form = AddRecordForm(request.POST or None)
 
     if request.user.is_authenticated:
         if request.method == "POST":
             if form.is_valid():
-                add_record = form.save()
+                form.save()
                 messages.success(request, "Record Added Successfully..")
                 return redirect('home')
         return render(request, 'website/addRecord.html', {'form': form})
